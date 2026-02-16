@@ -31,12 +31,18 @@ app.use(
   }),
 );
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET as string,
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    },
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_URI as string,
       collectionName: "sessions",
