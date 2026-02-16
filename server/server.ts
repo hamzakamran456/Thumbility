@@ -25,7 +25,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://thumbility.vercel.app",
+      "https://thumbility-nine.vercel.app",
     ],
     credentials: true,
   }),
